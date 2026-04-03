@@ -1,15 +1,19 @@
 <section class="hero">
   <div class="hero-bg">
-    <video autoplay muted loop playsinline>
-      <source src="{{ 'hero-video.mp4' | asset_url }}" type="video/mp4">
-    </video>
+    {%- if section.settings.video -%}
+      {{- section.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, controls: false -}}
+    {%- else -%}
+      <video autoplay muted loop playsinline>
+        <source src="{{ 'hero-video.mp4' | asset_url }}" type="video/mp4">
+      </video>
+    {%- endif -%}
     {%- if section.settings.image -%}
       <img
         src="{{ section.settings.image | image_url: width: 2000 }}"
         alt="{{ section.settings.image.alt | escape | default: shop.name }}"
         width="2000"
         loading="eager"
-        style="display:none;"
+        {% if section.settings.video %}style="display:none;"{% endif %}
       >
     {%- endif -%}
   </div>
@@ -26,9 +30,24 @@
   "name": "Hero",
   "settings": [
     {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Hero video",
+      "info": "Upload a video in Settings → Files, then select it here. If empty, the default bundled video plays."
+    },
+    {
       "type": "image_picker",
       "id": "image",
-      "label": "Fallback image (shown if video fails to load)"
+      "label": "Fallback image",
+      "info": "Shown while video loads or if no video is set."
+    },
+    {
+      "type": "header",
+      "content": "Content"
     },
     {
       "type": "text",
