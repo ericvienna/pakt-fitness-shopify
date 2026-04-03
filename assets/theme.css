@@ -12,7 +12,7 @@
   --gold-subtle: rgba(146, 142, 107, 0.15);
   --warm-gold: #dcaa7a;
   --font-display: 'Countach', 'Helvetica Neue', sans-serif;
-  --font-body: 'Supply', 'Helvetica Neue', sans-serif;
+  --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --max-width: 1200px;
   --nav-height: 72px;
   --transition: 300ms ease;
