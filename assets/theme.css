@@ -143,11 +143,15 @@ h1, h2, h3, h4 {
   min-height: 100vh;
   display: flex;
   align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: center;
   text-align: left;
-  padding: 0 clamp(20px, 4vw, 80px) clamp(60px, 8vh, 120px);
+  padding: 0 44px clamp(60px, 8vh, 120px);
   position: relative;
   overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .hero { padding: 0 20px 60px; }
 }
 
 .hero-bg {
@@ -178,7 +182,8 @@ h1, h2, h3, h4 {
 .hero-content {
   position: relative;
   z-index: 1;
-  max-width: 700px;
+  width: 100%;
+  max-width: var(--max-width);
 }
 
 .hero-eyebrow {
@@ -202,7 +207,7 @@ h1, h2, h3, h4 {
   font-size: clamp(15px, 1.4vw, 18px);
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.55);
-  max-width: 440px;
+  max-width: 480px;
   margin-bottom: 40px;
 }
 
