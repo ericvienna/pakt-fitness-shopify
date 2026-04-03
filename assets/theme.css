@@ -142,15 +142,44 @@ h1, h2, h3, h4 {
 .hero {
   min-height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 140px 20px 100px;
-  background: var(--bg);
+  align-items: flex-end;
+  justify-content: flex-start;
+  text-align: left;
+  padding: 0 clamp(20px, 4vw, 80px) clamp(60px, 8vh, 120px);
   position: relative;
+  overflow: hidden;
 }
 
-.hero-content { max-width: 900px; }
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(17, 18, 12, 0.92) 0%,
+    rgba(17, 18, 12, 0.5) 40%,
+    rgba(17, 18, 12, 0.15) 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+}
 
 .hero-eyebrow {
   font-family: var(--font-body);
@@ -158,23 +187,23 @@ h1, h2, h3, h4 {
   text-transform: uppercase;
   letter-spacing: 0.4em;
   color: var(--gold-dim);
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 
 .hero-title {
-  font-size: clamp(4rem, 12vw, 10rem);
-  margin-bottom: 36px;
+  font-size: clamp(3.5rem, 10vw, 9rem);
+  margin-bottom: 28px;
   color: var(--gold);
 }
 
 .hero-subtitle {
   font-family: var(--font-body);
-  font-weight: 700;
-  font-size: clamp(15px, 1.6vw, 20px);
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.5);
-  max-width: 540px;
-  margin: 0 auto 48px;
+  font-weight: 400;
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.55);
+  max-width: 440px;
+  margin-bottom: 40px;
 }
 
 /* ============================================
