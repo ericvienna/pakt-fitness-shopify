@@ -1,0 +1,20 @@
+<a href="{{ product.url }}" class="product-card">
+  <div class="product-card-image">
+    {%- if product.featured_image -%}
+      <img
+        src="{{ product.featured_image | image_url: width: 600 }}"
+        alt="{{ product.featured_image.alt | escape | default: product.title }}"
+        width="600"
+        height="600"
+        loading="lazy"
+      >
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </div>
+  <div class="product-card-body">
+    <span class="product-card-tag">{{ product.type }}</span>
+    <h3 class="product-card-title">{{ product.title }}</h3>
+    <span class="product-card-price">{{ product.price | money }}</span>
+  </div>
+</a>

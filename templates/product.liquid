@@ -1,0 +1,140 @@
+<div class="product-page">
+  <div class="product-layout">
+
+    {%- comment -%} GALLERY {%- endcomment -%}
+    <div class="product-gallery">
+      <div class="product-gallery-main">
+        {%- if product.featured_image -%}
+          <img
+            id="product-main-image"
+            src="{{ product.featured_image | image_url: width: 800 }}"
+            alt="{{ product.featured_image.alt | escape | default: product.title }}"
+            width="800"
+            height="800"
+          >
+        {%- endif -%}
+      </div>
+
+      {%- if product.images.size > 1 -%}
+        <div style="display: flex; gap: 8px;">
+          {%- for image in product.images -%}
+            <button
+              class="product-thumb"
+              data-src="{{ image | image_url: width: 800 }}"
+              style="width: 80px; height: 80px; border-radius: 4px; overflow: hidden; border: 1px solid var(--gold-subtle); background: var(--bg-alt); cursor: pointer; padding: 0;"
+            >
+              <img
+                src="{{ image | image_url: width: 160 }}"
+                alt="{{ image.alt | escape }}"
+                width="80" height="80"
+                style="width: 100%; height: 100%; object-fit: cover;"
+                loading="lazy"
+              >
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} INFO {%- endcomment -%}
+    <div class="product-info">
+      <p class="product-info-eyebrow">{{ product.type }}</p>
+      <h1>{{ product.title }}</h1>
+      <p class="product-info-price">{{ product.price | money }}</p>
+
+      {%- if product.description != blank -%}
+        <div class="product-info-description">{{ product.description }}</div>
+      {%- endif -%}
+
+      {%- comment -%} ADD TO CART FORM {%- endcomment -%}
+      {% form 'product', product %}
+        <input type="hidden" name="id" id="variant-id" value="{{ product.selected_or_first_available_variant.id }}">
+
+        {%- if product.has_only_default_variant == false -%}
+          {%- for option in product.options_with_values -%}
+            <div class="size-selector">
+              <span class="size-label">{{ option.name }}</span>
+              <div class="size-options">
+                {%- for value in option.values -%}
+                  <button
+                    type="button"
+                    class="size-btn{% if forloop.first %} selected{% endif %}"
+                    data-option="{{ option.name }}"
+                    data-value="{{ value }}"
+                  >
+                    {{ value }}
+                  </button>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+
+        <div class="quantity-row">
+          <span class="size-label">Qty</span>
+          <input type="number" name="quantity" value="1" min="1" class="quantity-input">
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full" {% unless product.available %}disabled{% endunless %}>
+          {%- if product.available -%}
+            Add to Cart
+          {%- else -%}
+            Sold Out
+          {%- endif -%}
+        </button>
+      {% endform %}
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Thumbnail switcher
+  document.querySelectorAll('.product-thumb').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const main = document.getElementById('product-main-image');
+      if (main) main.src = this.dataset.src;
+    });
+  });
+
+  // Variant selection
+  const variantData = {{ product.variants | json }};
+  const optionSelectors = {};
+
+  document.querySelectorAll('.size-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const option = this.dataset.option;
+      const value = this.dataset.value;
+
+      document.querySelectorAll(`.size-btn[data-option="${option}"]`)
+        .forEach(b => b.classList.remove('selected'));
+      this.classList.add('selected');
+
+      optionSelectors[option] = value;
+      updateVariant();
+    });
+  });
+
+  // Initialize first options
+  document.querySelectorAll('.size-btn.selected').forEach(btn => {
+    optionSelectors[btn.dataset.option] = btn.dataset.value;
+  });
+
+  function updateVariant() {
+    const selected = Object.values(optionSelectors);
+    const match = variantData.find(v => {
+      return v.options.every((opt, i) => opt === selected[i]);
+    });
+    if (match) {
+      document.getElementById('variant-id').value = match.id;
+      const submit = document.querySelector('button[type="submit"]');
+      if (match.available) {
+        submit.disabled = false;
+        submit.textContent = 'Add to Cart';
+      } else {
+        submit.disabled = true;
+        submit.textContent = 'Sold Out';
+      }
+    }
+  }
+</script>

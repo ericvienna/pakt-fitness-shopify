@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PAKT Fitness — Theme Preview</title>
+
+  <style>
+    @font-face { font-family: 'Countach'; src: url('assets/Countach-Light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Countach'; src: url('assets/Countach-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Countach'; src: url('assets/Countach-Bold.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Supply'; src: url('assets/Supply-Light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Supply'; src: url('assets/Supply-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Supply'; src: url('assets/Supply-Medium.otf') format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Supply'; src: url('assets/Supply-Bold.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
+  </style>
+  <link rel="stylesheet" href="assets/theme.css">
+  <link rel="icon" type="image/svg+xml" href="assets/pakt-logo.svg">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="#" class="logo-link">
+        <img src="assets/pakt-logo.svg" alt="PAKT" class="logo" width="120" height="36">
+      </a>
+      <nav class="main-nav" id="main-nav">
+        <a href="#products" class="nav-link">Shop</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#" class="nav-link cart-link">Cart (0)</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-content">
+        <p class="hero-eyebrow">Founding Member Merch</p>
+        <h1 class="hero-title">First to<br>Sweat.</h1>
+        <p class="hero-subtitle">Limited-run pieces for the crew who believed first. Once they're gone, they're gone.</p>
+        <a href="#products" class="btn btn-primary">Shop the Drop</a>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="collection-section" id="products">
+      <div class="collection-header">
+        <h2>The Drop</h2>
+        <div class="divider-row" style="margin-top: 16px;">
+          <span class="divider-line"></span>
+          <span class="divider-label">Limited Edition</span>
+          <span class="divider-line"></span>
+        </div>
+      </div>
+
+      <div class="product-grid" style="max-width: var(--max-width); margin: 0 auto;">
+
+        <!-- Product 1 -->
+        <a href="#product-detail" class="product-card" onclick="showProduct(0); return false;">
+          <div class="product-card-image">
+            <img src="preview-images/222.jpg" alt="First to Sweat Tee" width="600" height="600">
+          </div>
+          <div class="product-card-body">
+            <span class="product-card-tag">Tee</span>
+            <h3 class="product-card-title">"First to Sweat" Oversized Tee</h3>
+            <span class="product-card-price">$65.00</span>
+          </div>
+        </a>
+
+        <!-- Product 2 -->
+        <a href="#product-detail" class="product-card" onclick="showProduct(1); return false;">
+          <div class="product-card-image">
+            <img src="preview-images/SQUARE.png" alt="Last to Quit Tee" width="600" height="600">
+          </div>
+          <div class="product-card-body">
+            <span class="product-card-tag">Tee</span>
+            <h3 class="product-card-title">"Last to Quit" Oversized Tee</h3>
+            <span class="product-card-price">$65.00</span>
+          </div>
+        </a>
+
+        <!-- Product 3 -->
+        <a href="#product-detail" class="product-card" onclick="showProduct(2); return false;">
+          <div class="product-card-image">
+            <img src="preview-images/SQUARE-1.png" alt="Movement is Connection Tee" width="600" height="600">
+          </div>
+          <div class="product-card-body">
+            <span class="product-card-tag">Tee</span>
+            <h3 class="product-card-title">"Movement is Connection" Oversized Tee</h3>
+            <span class="product-card-price">$65.00</span>
+          </div>
+        </a>
+
+        <!-- Product 4 -->
+        <a href="#product-detail" class="product-card" onclick="showProduct(3); return false;">
+          <div class="product-card-image">
+            <img src="preview-images/SQUARE-2.png" alt="PAKT Tote" width="600" height="600">
+          </div>
+          <div class="product-card-body">
+            <span class="product-card-tag">Accessories</span>
+            <h3 class="product-card-title">PAKT Tote</h3>
+            <span class="product-card-price">$40.00</span>
+          </div>
+        </a>
+
+        <!-- Product 5 -->
+        <a href="#product-detail" class="product-card" onclick="showProduct(4); return false;">
+          <div class="product-card-image">
+            <img src="preview-images/SQUARE-3.png" alt="PAKT Dad Cap" width="600" height="600">
+          </div>
+          <div class="product-card-body">
+            <span class="product-card-tag">Accessories</span>
+            <h3 class="product-card-title">PAKT. Dad Cap</h3>
+            <span class="product-card-price">$45.00</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- PRODUCT DETAIL (overlay) -->
+    <div id="product-detail" style="display: none; position: fixed; inset: 0; z-index: 200; background: var(--bg); overflow-y: auto;">
+      <button onclick="closeProduct()" style="position: fixed; top: 24px; right: 32px; z-index: 210; font-family: var(--font-body); font-size: 13px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gold); background: none; border: none; cursor: pointer;">Close &times;</button>
+      <div class="product-page">
+        <div class="product-layout">
+          <div class="product-gallery">
+            <div class="product-gallery-main">
+              <img id="pdp-image" src="" alt="" width="800" height="800">
+            </div>
+          </div>
+          <div class="product-info">
+            <p class="product-info-eyebrow" id="pdp-type"></p>
+            <h1 id="pdp-title"></h1>
+            <p class="product-info-price" id="pdp-price"></p>
+            <div class="product-info-description" id="pdp-desc"></div>
+
+            <div class="size-selector" id="pdp-sizes">
+              <span class="size-label">Size</span>
+              <div class="size-options" id="pdp-size-btns"></div>
+            </div>
+
+            <div class="quantity-row">
+              <span class="size-label">Qty</span>
+              <input type="number" value="1" min="1" class="quantity-input">
+            </div>
+
+            <button class="btn btn-primary btn-full">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about" style="padding: 120px 44px; background: var(--bg-alt); display: flex; justify-content: center;">
+      <div style="max-width: 700px; text-align: center;">
+        <p style="font-family: var(--font-body); font-size: 11px; text-transform: uppercase; letter-spacing: 0.3em; color: var(--gold-dim); margin-bottom: 20px;">About</p>
+        <h2 style="font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 32px;">Last to Quit.</h2>
+        <p style="font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.6);">
+          PAKT is a training crew built on one idea: you show up, you finish, you come back.
+          This merch is for the founding 50 — the ones who committed before the doors opened.
+          Limited quantities. No restocks. When it's gone, it's gone.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="assets/pakt-logo.svg" alt="PAKT" class="footer-logo" width="80" height="24">
+        <p class="footer-tagline">Last to quit.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#products">Shop</a>
+        <a href="#about">About</a>
+        <a href="#">Returns</a>
+        <a href="#">Shipping</a>
+      </div>
+      <div class="footer-legal">
+        <p>&copy; 2026 PAKT Fitness. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav
+    const toggle = document.getElementById('nav-toggle');
+    const nav = document.getElementById('main-nav');
+    if (toggle && nav) toggle.addEventListener('click', () => { nav.classList.toggle('open'); toggle.classList.toggle('open'); });
+
+    // Scroll header
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
+
+    // Products data
+    const products = [
+      { title: '"First to Sweat" Oversized Tee', type: 'Tee', price: '$65.00', img: 'preview-images/222.jpg', desc: 'Acid-wash oversized tee. Tone-on-tone "FIRST TO SWEAT" front print. Small PAKT mark on back right shoulder. Sand colorway. 100% heavyweight cotton. Boxy cut.', sizes: ['S','M','L','XL','XXL'] },
+      { title: '"Last to Quit" Oversized Tee', type: 'Tee', price: '$65.00', img: 'preview-images/SQUARE.png', desc: 'Acid-wash oversized tee. Tone-on-tone "LAST TO QUIT" front print. Small PAKT mark on back right shoulder. Black wash colorway. 100% heavyweight cotton. Boxy cut.', sizes: ['S','M','L','XL','XXL'] },
+      { title: '"Movement is Connection" Oversized Tee', type: 'Tee', price: '$65.00', img: 'preview-images/SQUARE-1.png', desc: 'Acid-wash oversized tee. "PAKT" front print in muted gold. "MOVEMENT IS CONNECTION" back print. Dark charcoal colorway. 100% heavyweight cotton. Boxy cut.', sizes: ['S','M','L','XL','XXL'] },
+      { title: 'PAKT Tote', type: 'Accessories', price: '$40.00', img: 'preview-images/SQUARE-2.png', desc: 'Natural canvas tote with embossed PAKT wordmark. Reinforced handles. Heavyweight 12oz canvas. Built to carry.', sizes: null },
+      { title: 'PAKT. Dad Cap', type: 'Accessories', price: '$45.00', img: 'preview-images/SQUARE-3.png', desc: 'Unstructured dad cap. "PAKT." embroidered front in muted gold. "LAST TO QUIT" embroidered back in tonal black. Adjustable strap. Washed black.', sizes: null },
+    ];
+
+    function showProduct(i) {
+      const p = products[i];
+      document.getElementById('pdp-image').src = p.img;
+      document.getElementById('pdp-image').alt = p.title;
+      document.getElementById('pdp-title').textContent = p.title;
+      document.getElementById('pdp-type').textContent = p.type;
+      document.getElementById('pdp-price').textContent = p.price;
+      document.getElementById('pdp-desc').textContent = p.desc;
+
+      const sizeSection = document.getElementById('pdp-sizes');
+      const sizeBtns = document.getElementById('pdp-size-btns');
+      if (p.sizes) {
+        sizeSection.style.display = '';
+        sizeBtns.innerHTML = p.sizes.map((s, j) =>
+          `<button class="size-btn${j === 1 ? ' selected' : ''}" onclick="this.parentElement.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('selected'));this.classList.add('selected');">${s}</button>`
+        ).join('');
+      } else {
+        sizeSection.style.display = 'none';
+      }
+
+      document.getElementById('product-detail').style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeProduct() {
+      document.getElementById('product-detail').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    // ESC to close
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeProduct(); });
+  </script>
+
+</body>
+</html>

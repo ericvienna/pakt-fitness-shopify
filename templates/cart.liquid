@@ -1,0 +1,60 @@
+<div class="cart-page">
+  <h1>Cart</h1>
+
+  {%- if cart.item_count > 0 -%}
+    {% form 'cart', cart %}
+      {%- for item in cart.items -%}
+        <div class="cart-item">
+          <div class="cart-item-image">
+            {%- if item.image -%}
+              <img
+                src="{{ item.image | image_url: width: 200 }}"
+                alt="{{ item.image.alt | escape | default: item.title }}"
+                width="100" height="100"
+                loading="lazy"
+              >
+            {%- endif -%}
+          </div>
+          <div class="cart-item-details">
+            <a href="{{ item.url }}" class="cart-item-title">{{ item.product.title }}</a>
+            {%- unless item.variant.title == 'Default Title' -%}
+              <span class="cart-item-variant">{{ item.variant.title }}</span>
+            {%- endunless -%}
+            <div style="display: flex; align-items: center; gap: 8px; margin-top: 8px;">
+              <input
+                type="number"
+                name="updates[]"
+                value="{{ item.quantity }}"
+                min="0"
+                class="quantity-input"
+                style="width: 56px; height: 36px; font-size: 13px;"
+                aria-label="Quantity for {{ item.title }}"
+              >
+              <a href="/cart/change?line={{ forloop.index }}&quantity=0" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold-dim); transition: color 300ms;">Remove</a>
+            </div>
+          </div>
+          <span class="cart-item-price">{{ item.line_price | money }}</span>
+        </div>
+      {%- endfor -%}
+
+      <div class="cart-totals">
+        <div class="cart-total-row">
+          <span class="cart-total-label">Subtotal</span>
+          <span class="cart-total-value">{{ cart.total_price | money }}</span>
+        </div>
+        <p style="font-size: 12px; color: var(--gold-dim);">Shipping calculated at checkout.</p>
+        <button type="submit" name="checkout" class="btn btn-primary" style="margin-top: 16px;">
+          Checkout
+        </button>
+        <button type="submit" name="update" class="btn btn-outline btn-small">
+          Update Cart
+        </button>
+      </div>
+    {% endform %}
+  {%- else -%}
+    <div class="cart-empty">
+      <p>Your cart is empty.</p>
+      <a href="/collections/all" class="btn btn-outline" style="margin-top: 32px;">Shop Now</a>
+    </div>
+  {%- endif -%}
+</div>

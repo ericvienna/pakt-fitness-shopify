@@ -1,0 +1,63 @@
+{%- assign collection = collections[section.settings.collection] -%}
+
+<section class="collection-section">
+  <div class="collection-header">
+    <h2>{{ section.settings.heading }}</h2>
+    <div class="divider-row" style="margin-top: 16px;">
+      <span class="divider-line"></span>
+      <span class="divider-label">{{ section.settings.label }}</span>
+      <span class="divider-line"></span>
+    </div>
+  </div>
+
+  <div class="product-grid">
+    {%- if collection -%}
+      {%- for product in collection.products limit: section.settings.limit -%}
+        {% render 'product-card', product: product %}
+      {%- else -%}
+        <p style="color: var(--gold-dim); text-align: center; grid-column: 1 / -1;">Coming soon.</p>
+      {%- endfor -%}
+    {%- else -%}
+      <p style="color: var(--gold-dim); text-align: center; grid-column: 1 / -1;">Collection not found. Create a collection and update the section settings.</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Drop"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Subheading label",
+      "default": "Limited Edition"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Products to show",
+      "min": 3,
+      "max": 12,
+      "step": 3,
+      "default": 6
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection"
+    }
+  ]
+}
+{% endschema %}

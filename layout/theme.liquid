@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>{{ page_title }}{% unless page_title contains shop.name %} — {{ shop.name }}{% endunless %}</title>
+
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  {{ content_for_header }}
+
+  {%- comment -%} Fonts: Countach (display) + Supply (body/labels) {%- endcomment -%}
+  {{ 'Countach-Light.otf' | asset_url | font_face_tag: font_family: 'Countach', font_weight: 300, font_style: 'normal', font_display: 'swap' }}
+  {{ 'Countach-Regular.otf' | asset_url | font_face_tag: font_family: 'Countach', font_weight: 400, font_style: 'normal', font_display: 'swap' }}
+  {{ 'Countach-Bold.otf' | asset_url | font_face_tag: font_family: 'Countach', font_weight: 700, font_style: 'normal', font_display: 'swap' }}
+  {{ 'Supply-Light.otf' | asset_url | font_face_tag: font_family: 'Supply', font_weight: 300, font_style: 'normal', font_display: 'swap' }}
+  {{ 'Supply-Regular.otf' | asset_url | font_face_tag: font_family: 'Supply', font_weight: 400, font_style: 'normal', font_display: 'swap' }}
+  {{ 'Supply-Medium.otf' | asset_url | font_face_tag: font_family: 'Supply', font_weight: 500, font_style: 'normal', font_display: 'swap' }}
+  {{ 'Supply-Bold.otf' | asset_url | font_face_tag: font_family: 'Supply', font_weight: 700, font_style: 'normal', font_display: 'swap' }}
+
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+  <link rel="canonical" href="{{ canonical_url }}">
+  <link rel="icon" type="image/svg+xml" href="{{ 'pakt-logo.svg' | asset_url }}">
+</head>
+<body>
+
+  {%- comment -%} NAV {%- endcomment -%}
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo-link">
+        <img src="{{ 'pakt-logo.svg' | asset_url }}" alt="{{ shop.name }}" class="logo" width="120" height="36">
+      </a>
+
+      <nav class="main-nav" id="main-nav">
+        <a href="/collections/all" class="nav-link">Shop</a>
+        <a href="/pages/about" class="nav-link">About</a>
+        <a href="/cart" class="nav-link cart-link">
+          Cart{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}
+        </a>
+      </nav>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main-content">
+    {{ content_for_layout }}
+  </main>
+
+  {%- comment -%} FOOTER {%- endcomment -%}
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="{{ 'pakt-logo.svg' | asset_url }}" alt="{{ shop.name }}" class="footer-logo" width="80" height="24">
+        <p class="footer-tagline">Last to quit.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="/collections/all">Shop</a>
+        <a href="/pages/about">About</a>
+        <a href="/policies/refund-policy">Returns</a>
+        <a href="/policies/shipping-policy">Shipping</a>
+      </div>
+
+      <div class="footer-legal">
+        <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const toggle = document.getElementById('nav-toggle');
+    const nav = document.getElementById('main-nav');
+    if (toggle && nav) {
+      toggle.addEventListener('click', () => {
+        nav.classList.toggle('open');
+        toggle.classList.toggle('open');
+      });
+    }
+
+    // Header scroll
+    const header = document.getElementById('site-header');
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y > 60) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+      lastScroll = y;
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
