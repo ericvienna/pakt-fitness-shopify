@@ -1,14 +1,20 @@
 <section class="hero">
-  {%- if section.settings.image -%}
-    <div class="hero-bg">
+  <div class="hero-bg">
+    {%- if section.settings.video -%}
+      <video autoplay muted loop playsinline>
+        <source src="{{ section.settings.video }}" type="video/mp4">
+      </video>
+    {%- endif -%}
+    {%- if section.settings.image -%}
       <img
         src="{{ section.settings.image | image_url: width: 2000 }}"
         alt="{{ section.settings.image.alt | escape | default: shop.name }}"
         width="2000"
         loading="eager"
+        {% if section.settings.video %}style="display:none;"{% endif %}
       >
-    </div>
-  {%- endif -%}
+    {%- endif -%}
+  </div>
   <div class="hero-content">
     <p class="hero-eyebrow">{{ section.settings.eyebrow }}</p>
     <h1 class="hero-title">{{ section.settings.heading }}</h1>
@@ -22,9 +28,16 @@
   "name": "Hero",
   "settings": [
     {
+      "type": "video_url",
+      "id": "video",
+      "label": "Background video URL (mp4)",
+      "accept": ["youtube", "vimeo"],
+      "info": "Or upload an mp4 to Files and paste the URL here."
+    },
+    {
       "type": "image_picker",
       "id": "image",
-      "label": "Background image"
+      "label": "Fallback image (shown if no video)"
     },
     {
       "type": "text",
